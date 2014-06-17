@@ -45,6 +45,12 @@ INITIALIZE
       Radius of curvature Rc = (0.5*L2 + L3)*L2/x_mono
       where x_mono in the displacement of the monochromator
    */
+   
+   /* Angles:
+   Cl_ang: angle of monochromator relative to the original beam. the monochromator deflects neutrons by diffraction
+   Al_ang: twice of Cl_ang. This is the direction the beam incident on the sample. "arm2" is at that angle and at the monochromator position, and can be used as a reference for sample placement.  Sample is LMS away from arm2 without rotation.
+   Cl_ang and Al_ang is determined from the monochromator material (d-spacing mostly) and desired incident energy.
+   */
 
 from math import sqrt, pi as PI, asin
 from mcni.utils.conversion import SE2V
