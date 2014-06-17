@@ -7,8 +7,18 @@ Removed:
 * SNSHitoTool
 * bank??_events/event_id(index, time_offset, time_zero)
 * instrument/bank??/event_id(index, time_offset, time_zero)
-* all children of DASlogs except "proton_charge"
+* all children of DASlogs except "proton_charge", "EnergyRequest", "msd", "s1", "s2"
 * monitor2_events, monitor3_events
+
+
+Notes about DASlogs entries
+---------------------------
+
+* proton_charge: 
+* EnergyRequest: requested incident energy. set it to actual Ei
+* msd: monochromator sample distance. default 1.8meter
+* s1: detector vessel angle
+* s2: sample angle
 
 
 Modifying template to create simulated HYSPEC event nexus file
@@ -55,3 +65,4 @@ Not critical
 * raw_frames
 * run_number
 * users: user1/2/3
+
