@@ -17,8 +17,8 @@ Notes about DASlogs entries
 * proton_charge: 
 * EnergyRequest: requested incident energy. set it to actual Ei
 * msd: monochromator sample distance. default 1.8meter
-* s1: detector vessel angle
-* s2: sample angle
+* s1: sample angle
+* s2: detector vessel angle
 
 
 Modifying template to create simulated HYSPEC event nexus file
