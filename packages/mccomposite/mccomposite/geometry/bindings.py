@@ -1,1 +1,0 @@
-from mccomposite.bindings import *

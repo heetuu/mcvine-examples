@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-gcc -lm -o sim SEQ_11_09_2009.c

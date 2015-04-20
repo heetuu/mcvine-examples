@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-arcs-reduce-nxs-using-mantid -nxs=arcs-sim.nxs --ei_guess=117 --qaxis=0,13,0.1 
-arcs-extract-iqe-from-nxs iqe.nxs iqe.h5
-python -c "import histogram.hdf as hh; iqe=hh.load('iqe.h5'); iq=iqe.sum('energy'); hh.dump(iq, 'iq.h5')"

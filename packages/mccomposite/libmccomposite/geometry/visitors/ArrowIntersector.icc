@@ -1,6 +1,0 @@
-#ifndef MCCOMPOSITE_GEOMETRY_ARROWINTERSECTOR_H
-#error ArrowIntersector.icc not meaningful outside ArrowIntersector.h
-#else
-
-
-#endif

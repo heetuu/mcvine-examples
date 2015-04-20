@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-arcs_moderator2sample --ncount=1e7 $@

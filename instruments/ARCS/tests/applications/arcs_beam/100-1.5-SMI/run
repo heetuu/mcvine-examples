@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-arcs_beam --ncount=1e7

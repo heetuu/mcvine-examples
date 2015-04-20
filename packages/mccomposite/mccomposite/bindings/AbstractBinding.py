@@ -1,1 +1,0 @@
-from mccomposite.AbstractBinding import AbstractBinding
