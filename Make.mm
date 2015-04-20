@@ -16,9 +16,6 @@ PROJECT = mcvine
 # directory structure
 
 BUILD_DIRS = \
-    packages \
-    instruments \
-    docs \
     examples \
 
 OTHER_DIRS = \
