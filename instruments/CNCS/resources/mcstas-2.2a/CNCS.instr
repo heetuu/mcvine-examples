@@ -76,7 +76,7 @@ INITIALIZE
 /* determine peak flux offset tzero [s] for moderator, Ei must be [meV] */
 T0=(1.0+Ei);
 T0=198.2*pow(T0,-0.84098)/1.e6;
-Toff=0.0;PATH=/SNS/CNCS/shared/Software
+Toff=0.0;//PATH=/SNS/CNCS/shared/Software
 
 
 /*TOF [s] and phases [deg]               */
@@ -126,7 +126,7 @@ AT(0,0,0) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 		      ymin = -.05,
 		      ymax = .05,
 		      nchan=1400,
-                      t0=0,t1=2800,
+                      tmin=0,tmax=2800,
                       filename="tout.det")
 At (0,0,0.998) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
 
@@ -184,7 +184,7 @@ AT (0,0,6.284) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /*COMPONENT tof1a=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nchan=1000,t0=2000,t1=7000,
+		      	    nchan=1000,tmin=2000,tmax=7000,
                             filename="tof1a.det")
 At (0,0,6.318) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
 
@@ -217,11 +217,11 @@ COMPONENT FChopper = Vitess_ChopperFermi(
 AT (0,0,6.413) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 /************************************************************************/
 
-/* 	12meV	        nchan=1000, t0=4000, t1=5000,*/
-/*	30meV 		    nchan=500, t0=2500, t1=3000,*/
+/* 	12meV	        nt=1000, t0=4000, t1=5000,*/
+/*	30meV 		    nt=500, t0=2500, t1=3000,*/
 COMPONENT tof1b=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nchan=1000, t0=8500, t1=9000,
+		      	    nt=1000, tmin=8500, tmax=9000,
                             filename="tof1b.det")
 At (0,0,6.555) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
@@ -230,14 +230,17 @@ COMPONENT Guide4 = Guide(w1=0.05, h1=0.1, w2=0.05, h2=0.1,
 			 l=0.925, m=2.5, R0=Gu_R, Qc=Gu_Qc, W=Gu_W, alpha=Gu_alpha)
 AT (0,0,6.560) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
-/* Chopper #2  Distance Moderator - CH#2 = 7515 mm, 60Hz = 2Pi*60= 376.9911 rad/s*/
-COMPONENT Chopper2=DiskChopper(R=0.25, theta_0=14.0, omega=376.9911, n=1, t_0=f2_tof)
+/* Chopper #2  Distance Moderator - CH#2 = 7515 mm, 60Hz = 2Pi*60= 376.9911 rad/s
+   R=0.25, theta_0=14.0, omega=376.9911, n=1, t_0=f2_tof
+*/
+COMPONENT Chopper2=DiskChopper(
+	  radius=0.25, theta_0=14.0, nu=60, nslit=1, delay=f2_tof, yheight=0)
 AT (0,0,7.515) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /*Beam monitor N2. I use TOF, PSD and energy monitors together */
 /*COMPONENT tof2=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nchan=1000,t0=5000,t1=6000,
+		      	    nt=1000,tmin=5000,tmax=6000,
                             filename="tof2.det")
 At (0,0,7.556) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
 
@@ -280,8 +283,11 @@ COMPONENT Guide8 = Guide(w1=0.05, h1=0.1, w2=0.035, h2=0.0765,
 			 l=2.447, m=3.5, R0=Gu_R, Qc=Gu_Qc, W=Gu_W, alpha=Gu_alpha)
 AT (0,0,30.545) RELATIVE arm1 
 
-/*Chopper #3  Distance Moderator - CH#3 = 33020 mm, 60Hz = 2Pi*60= 376.9911 rad/s*/
-COMPONENT Chopper3=DiskChopper(R=0.25, theta_0=14.0, omega=376.9911, n=1, t_0=f3_tof)
+/*Chopper #3  Distance Moderator - CH#3 = 33020 mm, 60Hz = 2Pi*60= 376.9911 rad/s
+   R=0.25, theta_0=14.0, omega=376.9911, n=1, t_0=f3_tof
+*/
+COMPONENT Chopper3=DiskChopper(
+	  radius=0.25, theta_0=14.0, nu=60, nslit=1, delay=f3_tof, yheight=0)
 AT (0,0,33.020) RELATIVE arm1
 
 /* Guide N9 funnel*/
@@ -291,7 +297,7 @@ AT (0,0,33.025) RELATIVE arm1
 
 /*COMPONENT tof3c=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nchan=300,t0=45000,t1=47000,
+		      	    nt=300,tmin=45000,tmax=47000,
                             filename="tof3c.det")
 At (0,0,34.735) RELATIVE arm1*/
 
@@ -307,19 +313,21 @@ At (0,0,34.735) RELATIVE arm1*/
 /* Slits: 9 deg, 4.4 deg, 2 deg 				*/ 
 /* 9/4.4 deg is High Flux mode	                                */
 /* 2/4.4 deg is High Resolution mode	                        */
-COMPONENT Chopper41=DiskChopper(R=0.2825, h=0.065, theta_0=9.0, omega=-f41omega, n=1, t_0=-f41_tof)
+/* R=0.2825, h=0.065, theta_0=9.0, omega=-f41omega, n=1, t_0=-f41_tof) */
+COMPONENT Chopper41=DiskChopper(
+	  radius=0.2825, yheight=0.065, theta_0=9.0, nu=-f41, nslit=1, delay=-f41_tof)
 AT (0,0,34.784) RELATIVE arm1
 /*COMPONENT Chopper42=DiskChopper(R=0.2825, h=0.065, theta_0=9.0, omega=f42omega, n=1, t_0=f42_tof)
 AT (0,0,34.785) RELATIVE arm1*/
 
 /*Beam monitor N3. */
-/*  3meV nchan=150,t0=45950,t1=46100,		*/
-/* 10meV nchan=150,t0=25100,t1=25250,		*/
-/* 30meV nchan=150,t0=14450,t1=14600,		*/
+/*  3meV nt=150,t0=45950,t1=46100,		*/
+/* 10meV nt=150,t0=25100,t1=25250,		*/
+/* 30meV nt=150,t0=14450,t1=14600,		*/
 COMPONENT tof3a=TOF_monitor(xmin = -.025,xmax = .025,
-		      	    ymin = -.05,ymax = .05,nchan=300,
-                            t0=mon3_tof_start,
-                            t1=mon3_tof_stop,
+		      	    ymin = -.05,ymax = .05,nt=300,
+                            tmin=mon3_tof_start,
+                            tmax=mon3_tof_stop,
                             filename="tof3a.det")
 At (0,0,d_mod_mon3) RELATIVE arm1
 
@@ -348,14 +356,14 @@ COMPONENT Guide11 = Guide(w1=0.015, h1=0.05, w2=0.015, h2=0.05,
 AT (0,0,35.762) RELATIVE arm1
 
 /*monitor at the sample position */
-/*  3meV nchan=150,t0=47900,t1=48150,		*/
-/* 10meV nchan=150,t0=26150,t1=26300,		*/
-/* 12mev nchan=150,t0=23850,t1=24000   TOF~23930*/
-/* 30meV nchan=150,t0=15050,t1=15200   TOF~15140*/
+/*  3meV nt=150,t0=47900,t1=48150,		*/
+/* 10meV nt=150,t0=26150,t1=26300,		*/
+/* 12mev nt=150,t0=23850,t1=24000   TOF~23930*/
+/* 30meV nt=150,t0=15050,t1=15200   TOF~15140*/
 
 /*COMPONENT tof_sample=TOF_monitor(xmin = -.0075,xmax = .0075,
-		      ymin = -.025,ymax = .025,nchan=300,
-                      t0=sample_tof_start,t1=sample_tof_stop,
+		      ymin = -.025,ymax = .025,nt=300,
+                      tmin=sample_tof_start,tmax=sample_tof_stop,
                       filename="tofs.det")
 At (0,0,36.262) RELATIVE arm1*/
 
@@ -412,13 +420,13 @@ COMPONENT beamstop = Beamstop(radius=0.05)
 /* distance between sample and detector: 3.5 m		*/
 
 COMPONENT CNCS_mon1 = Monitor_nD(
-  xwidth = 7.0, yheight = 2.0, zthick = 0,
+  xwidth = 7.0, yheight = 2.0, zdepth = 0,
   options = "banana, theta limits=[3.814,132.606] bins=288, y bins=128, file = mon1_coll, verbouse, parallel")
 AT (0,0,0) RELATIVE arm2				
 
 /* Y-integrated						*/
 /*COMPONENT CNCS_mon2 = Monitor_nD(
-  xwidth = 7.0, yheight = 2.0, zthick = 0,
+  xwidth = 7.0, yheight = 2.0, zdepth = 0,
   options = "banana, theta limits=[3.814,132.606] bins=288, multiple, file = mon2_coll, verbouse, parallel")
 AT (0,0,0) RELATIVE arm2*/
 
