@@ -98,12 +98,21 @@ Toff=0.0;//PATH=/SNS/CNCS/shared/Software
      f42omega=f42*2.0*3.1415926;
 
      sample_tof=T0+(2286.3*d_mod_sample)/sqrt(Ei);
+/*
      sample_tof_start=sample_tof-150;
      sample_tof_stop=sample_tof+150;
+*/
+     sample_tof_start=sample_tof-500;
+     sample_tof_stop=sample_tof+500;
+     printf("sample tof window: %g, %g\n", sample_tof_start, sample_tof_stop);
 
      mon3_tof=T0+(2286.3*d_mod_mon3)/sqrt(Ei);
+/*
      mon3_tof_start=mon3_tof-150;
      mon3_tof_stop=mon3_tof+150;
+*/
+     mon3_tof_start=mon3_tof-500;
+     mon3_tof_stop=mon3_tof+500;
 
 %}
 
@@ -121,27 +130,27 @@ AT(0,0,0) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 
 /* Fiction Tof and Energy monitors for the test purposes only */
-/*COMPONENT dett=TOF_monitor(xmin = -.025,
+COMPONENT dett=TOF_monitor(xmin = -.025,
 	              xmax = .025,
 		      ymin = -.05,
 		      ymax = .05,
-		      nchan=1400,
+		      nt=1400,
                       tmin=0,tmax=2800,
                       filename="tout.det")
-At (0,0,0.998) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+At (0,0,0.998) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
-/*COMPONENT entest1=E_monitor(xmin = -.025,xmax = .025,
+COMPONENT entest1=E_monitor(xmin = -.025,xmax = .025,
 		      	  ymin = -.05,ymax = .05,
                           Emin=0.0, Emax=50.0, 
-                          nchan=100, 
+                          nE=100, 
                           filename="entest1.det")
-AT (0,0,0.999) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+AT (0,0,0.999) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
-/*COMPONENT psdtest1=PSD_monitor(xmin = -.025,xmax = .025,
+COMPONENT psdtest1=PSD_monitor(xmin = -.025,xmax = .025,
 		      	  ymin = -.05,ymax = .05,
             		  nx=50, ny=100, 
 			  filename="psdtest1.det")
-AT (0,0,1.001) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+AT (0,0,1.001) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /*Neutron guides								    */
 /*Author: Kristian Nielsen, Origin: Risoe, Date: September 2 1998, Version: 1.31    */
@@ -153,16 +162,16 @@ AT (0,0,1.002) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 
 /*Beam monitor N1. I use TOF, PSD and energy monitors together */
-/*COMPONENT dett1=TOF_monitor(xmin = -.025,xmax = .025,
+COMPONENT dett1=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05, ymax = .05,
-		      	    nchan=1000, dt=50,
+		      	    nt=1000, dt=50,
                             filename="tof1.det")
 AT (0,0,6.313) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 COMPONENT edet1=E_monitor(xmin = -.025,xmax = .025,
 		      	  ymin = -.05,ymax = .05,
                           Emin=0.0, Emax=50.0, 
-                          nchan=100, 
+                          nE=100, 
                           filename="en1.det")
 AT (0,0,6.314) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
@@ -172,21 +181,25 @@ COMPONENT psd1=PSD_monitor(xmin = -.025,xmax = .025,
 			  filename="psd1.det")
 AT (0,0,6.316) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
+/*
 COMPONENT DivMon1 = DivPos_monitor(
           npos=20, ndiv=20, filename="divmon2.dip",
           xmin=-0.025, xmax=0.025, ymin=-0.05, ymax=0.05, 
           maxdiv=2)
-AT (0,0,6.317) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+AT (0,0,6.317) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
+*/
 
 /* all Al-windows at CNCS */
+/*
 COMPONENT Al_win = Al_window(win_thick=0.033)
 AT (0,0,6.284) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
+*/
 
-/*COMPONENT tof1a=TOF_monitor(xmin = -.025,xmax = .025,
+COMPONENT tof1a=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nchan=1000,tmin=2000,tmax=7000,
+		      	    nt=1000,tmin=2000,tmax=7000,
                             filename="tof1a.det")
-At (0,0,6.318) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+At (0,0,6.318) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /* Fermi Chopper ********************************************************/
 /*                                                                      */
@@ -219,9 +232,10 @@ AT (0,0,6.413) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /* 	12meV	        nt=1000, t0=4000, t1=5000,*/
 /*	30meV 		    nt=500, t0=2500, t1=3000,*/
+/*      ??meV           nt=1000, tmin=8500, tmax=9000, */
 COMPONENT tof1b=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nt=1000, tmin=8500, tmax=9000,
+		      	    nt=1000, tmin=3000, tmax=6000,
                             filename="tof1b.det")
 At (0,0,6.555) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
@@ -238,11 +252,11 @@ COMPONENT Chopper2=DiskChopper(
 AT (0,0,7.515) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /*Beam monitor N2. I use TOF, PSD and energy monitors together */
-/*COMPONENT tof2=TOF_monitor(xmin = -.025,xmax = .025,
+COMPONENT tof2=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nt=1000,tmin=5000,tmax=6000,
+		      	    nt=1000,tmin=4500,tmax=6500,
                             filename="tof2.det")
-At (0,0,7.556) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+At (0,0,7.556) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /*COMPONENT ent2=E_monitor(xmin = -.025,xmax = .025,
 		      	  ymin = -.05,ymax = .05,
@@ -295,11 +309,11 @@ COMPONENT Guide9 = Guide(w1=0.0332, h1=0.076, w2=0.0218, h2=0.0597,
 			 l=1.700, m=3.5, R0=Gu_R, Qc=Gu_Qc, W=Gu_W, alpha=Gu_alpha)
 AT (0,0,33.025) RELATIVE arm1
 
-/*COMPONENT tof3c=TOF_monitor(xmin = -.025,xmax = .025,
+COMPONENT tof3c=TOF_monitor(xmin = -.025,xmax = .025,
 		      	    ymin = -.05,ymax = .05,
-		      	    nt=300,tmin=45000,tmax=47000,
+		      	    nt=300,tmin=20000,tmax=30000,
                             filename="tof3c.det")
-At (0,0,34.735) RELATIVE arm1*/
+At (0,0,34.735) RELATIVE arm1
 
 
 /* Chopper #4  DoubleDisk. Distance Moderator - CH#4 = 34784 mm */
@@ -361,29 +375,32 @@ AT (0,0,35.762) RELATIVE arm1
 /* 12mev nt=150,t0=23850,t1=24000   TOF~23930*/
 /* 30meV nt=150,t0=15050,t1=15200   TOF~15140*/
 
-/*COMPONENT tof_sample=TOF_monitor(xmin = -.0075,xmax = .0075,
+COMPONENT tof_sample=TOF_monitor(xmin = -.0075,xmax = .0075,
 		      ymin = -.025,ymax = .025,nt=300,
                       tmin=sample_tof_start,tmax=sample_tof_stop,
                       filename="tofs.det")
-At (0,0,36.262) RELATIVE arm1*/
+At (0,0,36.262) RELATIVE arm1
 
-/*COMPONENT ent_sample=E_monitor(xmin = -.0075,xmax = .0075,
+COMPONENT ent_sample=E_monitor(xmin = -.0075,xmax = .0075,
 		      	    ymin = -.025,ymax = .025,
-                          Emin=29.5, Emax=30.5, 
-                          nchan=100, 
+                          Emin=emin, Emax=emax, 
+                          nE=100, 
                           filename="ents.det")
-AT (0,0,36.263) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+AT (0,0,36.263) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 
-/*COMPONENT psd_sample=PSD_monitor(xmin = -.005,xmax = .005,
+COMPONENT psd_sample=PSD_monitor(xmin = -.005,xmax = .005,
 		      	  ymin = -.005,ymax = .005,
             		  nx=100, ny=100, 
 			  filename="psds.psd")
-AT (0,0,36.264) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1*/
+AT (0,0,36.264) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 
 /* Vanadium sample, an isotropic scatterer.   */
-COMPONENT target = V_sample(radius_i = 0.0, radius_o = 0.002,
+/* COMPONENT target = V_sample(radius_i = 0.0, radius_o = 0.002,
   h = 0.05, focus_aw = 265, focus_ah = 35.0, pack = 1, 
+  sig_a = 0.0, target_z = 3.5) */
+COMPONENT target = V_sample(radius_i = 0.0, radius = 0.002,
+  yheight = 0.05, focus_aw = 265, focus_ah = 35.0, pack = 1, 
   sig_a = 0.0, target_z = 3.5)
 At (0,0,36.264) RELATIVE arm1 ROTATED (0,0,0) RELATIVE arm1
 

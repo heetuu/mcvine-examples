@@ -1,0 +1,2 @@
+./clean
+./CNCS -n 1e6 Ei=10 
