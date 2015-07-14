@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-mcvine-convert-mcstas-instrument --input=hyspec_moderator2sample.instr
+# obsolete: mcvine-convert-mcstas-instrument --input=hyspec_moderator2sample.instr
+mcvine mcstas convertinstrument hyspec_moderator2sample.instr
 ./config-hyspec_moderator2sample
 mv hyspec_moderator2sample ../applications/
 mv config-hyspec_moderator2sample ../applications/
