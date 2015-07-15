@@ -1,0 +1,2 @@
+mcstas beam.instr 
+gcc -o beam beam.c -lm
