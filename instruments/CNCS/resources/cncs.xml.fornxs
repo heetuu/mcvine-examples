@@ -21,6 +21,12 @@
 
     <DetectorSystem guid="2" name="detSystem" id="1">
 
+
+      <Shape>
+        <hollowCylinder in_radius="3.3" out_radius="3.7" height="2.3"/>
+      </Shape>
+
+
         <DetectorPack guid="3" name="pack0" id="0">
             <Shape>
             <!--

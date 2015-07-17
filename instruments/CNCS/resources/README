@@ -1,2 +1,3 @@
-cncs.xml.fornxs: copied from instrument/tests/instrument/factories/CNCS/cncs-mantid-idf-danse.xml 
-
+cncs.xml.fornxs: 
+  modified from instrument/tests/instrument/factories/CNCS/cncs-mantid-idf-danse.xml 
+  by adding a shape for the det sys
