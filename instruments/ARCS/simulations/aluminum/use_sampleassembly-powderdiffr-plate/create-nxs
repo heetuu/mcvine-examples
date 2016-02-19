@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-time arcs-neutrons2nxs --neutrons=out/scattered-neutrons
