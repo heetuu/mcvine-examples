@@ -29,9 +29,9 @@ set (PKGCLOUD_REPO "ins")
 set(DOCKER_PKGING_DEB_DIST_NAME "ubuntu")
 set(DOCKER_PKGING_DEB_DIST_VERSION "14.04")
 # dependencies
-set (DOCKER_PKGING_DEPS_DEB "ls /opt/danse/share/mcvine/resources")
+set (DOCKER_PKGING_DEPS_DEB "")
 set (DOCKER_PKGING_DEPS_RPM "")
-set (DOCKER_PKGING_TEST_SRPM "")
+set (DOCKER_PKGING_TEST_SRPM "ls /opt/danse/share/mcvine/resources")
 set (DOCKER_PKGING_TEST_RPM ${DOCKER_PKGING_TEST_SRPM})
 set (DOCKER_PKGING_TEST_DEB ${DOCKER_PKGING_TEST_SRPM})
 
